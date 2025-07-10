@@ -1,12 +1,14 @@
 import pandas as pd
-from .instruments import fal
+from .instruments import fal_data, ehi_data
 from typing import Dict
 
 def get_instrument_template(name: str) -> pd.DataFrame:
-    """Return a pandas DataFrame template for a given REDCap instrument name."""
-    templates: Dict[str, pd.DataFrame] = {
-        "fal": fal,
+    meta = {
+        "fal": fal_data,
+        "ehi": ehi_data,
     }
-    if name not in templates:
+    if name not in meta:
         raise ValueError(f"Unknown instrument: {name}")
-    return templates[name].copy()
+    # Extract field names for participant data entry
+    field_names = [f["field_name"] for f in meta[name]]
+    return pd.DataFrame(columns=field_names)

@@ -1,34 +1,22 @@
 import pandas as pd
-from rcol.template import RedcapInstrumentTemplate
+from redcap_templates import get_instrument_template, stack_instruments
 
 def test_create_template():
-    fields = ['record_id', 'field1', 'field2']
-    template = RedcapInstrumentTemplate(fields, 'test_instrument')
-    df = template.create_template(3)
-    assert list(df.columns) == fields
-    assert len(df) == 3
+    fal = get_instrument_template("fal")
+    df = fal.copy()
+    assert "record_id" in df.columns
+    assert len(df) == 0
 
 def test_stack_templates():
-    fields = ['record_id', 'field1']
-    t = RedcapInstrumentTemplate(fields, 'test')
-    df1 = t.create_template(2)
-    df2 = t.create_template(1)
-    stacked = RedcapInstrumentTemplate.stack_templates([df1, df2])
-    assert len(stacked) == 3
-    assert list(stacked.columns) == fields
-
-def test_to_redcap_format():
-    fields = ['record_id', 'field1']
-    t = RedcapInstrumentTemplate(fields, 'test')
-    df = t.create_template(1)
-    formatted = t.to_redcap_format(df)
-    assert isinstance(formatted, pd.DataFrame)
-    assert list(formatted.columns) == fields
+    fal1 = get_instrument_template("fal")
+    fal2 = get_instrument_template("fal")
+    fal1.loc[0] = [1] + [None]*(len(fal1.columns)-1)
+    fal2.loc[0] = [2] + [None]*(len(fal2.columns)-1)
+    stacked = stack_instruments([fal1, fal2])
+    assert len(stacked) == 2
+    assert "record_id" in stacked.columns
 
 def test_redcap_compatibility():
-    # Simulate REDCap compatibility: all columns must be strings, no missing field names
-    fields = ['record_id', 'field1', 'field2']
-    t = RedcapInstrumentTemplate(fields, 'test')
-    df = t.create_template(2)
-    assert all(isinstance(col, str) for col in df.columns)
-    assert all(col for col in df.columns)
+    fal = get_instrument_template("fal")
+    assert all(isinstance(col, str) and col for col in fal.columns)
+    assert fal.empty

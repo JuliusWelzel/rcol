@@ -16,7 +16,7 @@ uv pip install .
 
 Example usage:
 ```python
-from redcap_templates import get_instrument_template, stack_instruments, upload_to_redcap
+from src.redcap_templates import get_instrument_template, stack_instruments, upload_to_redcap
 
 df = get_instrument_template('demographics')
 # ... fill in data ...

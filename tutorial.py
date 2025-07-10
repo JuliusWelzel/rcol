@@ -4,15 +4,14 @@ Adapted from https://github.com/JuliusWelzel/redcap2bids/blob/master/scripts/ins
 """
 import pandas as pd
 from redcap import Project
-from redcap_templates import get_instrument_template, stack_instruments
-# import redcap  # Uncomment if you want to actually upload
+from redcap_templates import get_instrument_template
 
 # 1. Get instrument templates (e.g., 'fal')
 fal = get_instrument_template("fal")
-# ehi = get_instrument_template("ehi")  # Add more as needed
+ehi = get_instrument_template("ehi")  # Add more as needed
 
 # 2. Stack all instrument metadata DataFrames
-all_instruments = pd.concat([fal], ignore_index=True)  # Add more: [fal, ehi, ...]
+all_instruments = pd.concat([fal,ehi], ignore_index=True)  # Add more: [fal, ehi, ...]
 
 print("All instrument metadata:")
 print(all_instruments.head())

@@ -1,3 +1,5 @@
+# This module is deprecated. Please use the installed package 'redcap_templates' instead.
+
 import pandas as pd
 from typing import List, Dict
 
