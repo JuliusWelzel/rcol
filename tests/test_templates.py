@@ -1,5 +1,5 @@
 import pandas as pd
-from redcap_templates import get_instrument_template, stack_instruments
+from rcol import get_instrument_template, stack_instruments
 
 def test_template_columns():
     fal = get_instrument_template("fal")

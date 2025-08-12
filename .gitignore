@@ -33,3 +33,4 @@ wheels/
 share/python-wheels/        
 
 *.egg-info/
+/.pytest_cache
