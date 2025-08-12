@@ -1,16 +1,16 @@
 [project]
 name = "rcol"
-version = "0.1.0"
+version = "0.5.0"
 description = "Pandas DataFrame templates for REDCap instruments, with stacking and upload functionality."
 authors = [
-    { name = "Your Name", email = "your@email.com" }
+    { name = "Julius Welzel", email = "julius.welzel@gmail.com" }
 ]
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
-    "dotenv>=0.9.9",
+    "python-dotenv",
     "pandas>=1.5.0",
-    "PyCap>=1.0.0",
+    "pycap>=0.0.1",
 ]
 
 [project.optional-dependencies]
@@ -20,3 +20,12 @@ develop = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.uv.workspace]
+members = [
+    ".",
+]
+
+[build-system]
+requires = ["uv_build>=0.8.9,<0.9.0"]
+build-backend = "uv_build"

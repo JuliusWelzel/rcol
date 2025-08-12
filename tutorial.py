@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import pandas as pd
 from redcap import Project
 import os
-from src.instruments import fal, ehi
+from src.rcol.instruments import fal, ehi
 
 load_dotenv()
 RC_API_KEY = os.getenv("RC_API_KEY")
