@@ -8,8 +8,9 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
+    "dotenv>=0.9.9",
     "pandas>=1.5.0",
-    "PyCap>=1.0.0"
+    "PyCap>=1.0.0",
 ]
 
 [project.optional-dependencies]
@@ -19,6 +20,3 @@ develop = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-
-[tool.uv]
-package = "src"

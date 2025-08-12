@@ -1,17 +1,22 @@
-"""
-Tutorial: Using the rcol package for REDCap instrument metadata design and upload
-"""
+from dotenv import load_dotenv
 import pandas as pd
-from rcol import get_instrument_template
+from redcap import Project
+import os
+from src.instruments import fal, ehi
 
-# 1. Get instrument templates (e.g., 'fal', 'ehi')
-fal = get_instrument_template("fal")
-ehi = get_instrument_template("ehi")
+load_dotenv()
+RC_API_KEY = os.getenv("RC_API_KEY")
 
-# 2. Stack all instrument DataFrames (for demonstration)
+
+# Stack all instrument DataFrames 
 all_instruments = pd.concat([fal, ehi], ignore_index=True)
+# print form names
+print("Form names:")
+print(all_instruments['form_name'].unique())
 
-print("All instrument data entry templates:")
-print(all_instruments.head())
+# initalize the redcap project
+api_url = 'https://redcapdev.uol.de/api/'
+rc_project = Project(api_url, RC_API_KEY)
 
-print("\nTutorial complete. This script is for instrument data entry template design. No participant data is uploaded.")
+# upload instruments to RedCap using the import_metadata method
+rc_project.import_metadata(all_instruments, import_format='df')

@@ -1,11 +1,11 @@
 import pandas as pd
-from .instruments import fal_data, ehi_data
-from typing import Dict
+from .instruments import fal, ehi
 
-def get_instrument_template(name: str) -> pd.DataFrame:
+
+def get_instrument(name: str) -> pd.DataFrame:
     meta = {
-        "fal": fal_data,
-        "ehi": ehi_data,
+        "fal": fal,
+        "ehi": ehi,
     }
     if name not in meta:
         raise ValueError(f"Unknown instrument: {name}")

@@ -1,5 +1,5 @@
 import pandas as pd
-from rcol import get_instrument_template, stack_instruments
+from src import get_instrument_template, stack_instruments
 
 def test_create_template():
     fal = get_instrument_template("fal")
