@@ -36,3 +36,4 @@ share/python-wheels/
 /.pytest_cache
 
 .env
+uv.lock
