@@ -848,3 +848,78 @@ ehi_data = [
     },
 ]
 ehi = pd.DataFrame(ehi_data)
+
+# BDI-II item texts from the official German version (Kurzform, Beck et al. 1996)
+bdi_ii_items = [
+    "Ich bin nicht traurig. | Ich bin traurig. | Ich bin ständig traurig und kann mich nicht davon lösen. | Ich bin so traurig oder unglücklich, dass ich es nicht mehr aushalte.",
+    "Ich sehe nicht besonders schwarz für die Zukunft. | Ich sehe schwarz für die Zukunft. | Ich fühle, dass nichts mehr gut werden kann. | Ich habe das Gefühl, dass meine Zukunft hoffnungslos ist und sich nichts bessern kann.",
+    "Ich habe nicht das Gefühl, ein Versager zu sein. | Ich habe öfter das Gefühl, versagt zu haben. | Wenn ich auf mein Leben zurückblicke, sehe ich nur viele Misserfolge. | Ich habe das Gefühl, als völliger Versager zu sein.",
+    "Ich bin mit mir und meinem Leben zufrieden. | Ich bin nicht mehr so zufrieden wie früher. | Ich bin mit mir und meinem Leben unzufrieden. | Ich bin völlig unzufrieden mit mir und meinem Leben.",
+    "Ich fühle mich nicht besonders schuldig. | Ich fühle mich öfter schuldig. | Ich fühle mich die meiste Zeit schuldig. | Ich fühle mich ständig schuldig.",
+    "Ich fühle mich nicht bestraft. | Ich fühle mich manchmal bestraft. | Ich fühle mich oft bestraft. | Ich fühle mich ständig bestraft.",
+    "Ich bin mit mir selbst zufrieden. | Ich bin mit mir selbst unzufrieden. | Ich verachte mich selbst. | Ich hasse mich selbst.",
+    "Ich kritisiere mich nicht mehr als sonst. | Ich kritisiere mich mehr als früher. | Ich kritisiere mich ständig. | Ich kritisiere mich für alles, was ich tue.",
+    "Ich habe keine Selbstmordgedanken. | Ich habe manchmal Selbstmordgedanken, würde sie aber nicht ausführen. | Ich habe öfter Selbstmordgedanken. | Ich würde mich am liebsten umbringen, wenn ich die Gelegenheit hätte.",
+    "Ich weine nicht mehr als sonst. | Ich weine jetzt öfter als früher. | Ich weine jetzt ständig. | Früher konnte ich weinen, jetzt kann ich es nicht mehr, auch wenn ich möchte.",
+    "Ich bin nicht unruhiger als sonst. | Ich bin manchmal unruhig oder nervös. | Ich bin oft unruhig oder nervös. | Ich bin ständig unruhig oder nervös.",
+    "Ich habe mein Interesse an anderen Menschen oder Aktivitäten nicht verloren. | Ich habe weniger Interesse an anderen Menschen oder Aktivitäten als früher. | Ich habe fast alles Interesse an anderen Menschen oder Aktivitäten verloren. | Ich habe das Interesse an anderen Menschen oder Aktivitäten völlig verloren.",
+    "Ich kann Entscheidungen genauso gut treffen wie früher. | Ich habe mehr Schwierigkeiten, Entscheidungen zu treffen als früher. | Ich habe große Schwierigkeiten, Entscheidungen zu treffen. | Ich kann überhaupt keine Entscheidungen mehr treffen.",
+    "Ich fühle mich nicht wertlos. | Ich fühle mich weniger wertvoll als früher. | Ich fühle mich wertlos. | Ich fühle mich völlig wertlos.",
+    "Ich habe genauso viel Energie wie früher. | Ich habe weniger Energie als früher. | Ich habe viel weniger Energie als früher. | Ich habe überhaupt keine Energie mehr.",
+    "Ich habe keine Schlafprobleme. | Ich schlafe schlechter als früher. | Ich wache nachts oft auf und habe Schwierigkeiten, wieder einzuschlafen. | Ich kann kaum noch schlafen.",
+    "Ich bin nicht reizbarer als sonst. | Ich bin leichter reizbar als früher. | Ich bin viel reizbarer als früher. | Ich bin ständig gereizt.",
+    "Mein Appetit ist nicht schlechter als sonst. | Mein Appetit ist schlechter als früher. | Mein Appetit ist jetzt viel schlechter. | Ich habe überhaupt keinen Appetit mehr.",
+    "Ich kann mich genauso gut konzentrieren wie früher. | Ich kann mich nicht mehr so gut konzentrieren wie früher. | Ich habe große Schwierigkeiten, mich zu konzentrieren. | Ich kann mich überhaupt nicht mehr konzentrieren.",
+    "Ich bin nicht müder oder erschöpfter als sonst. | Ich bin schneller müde oder erschöpft als früher. | Ich bin fast immer müde oder erschöpft. | Ich bin ständig müde oder erschöpft.",
+    "Ich habe mein Interesse an Sexualität nicht verloren. | Ich habe weniger Interesse an Sexualität als früher. | Ich habe fast alles Interesse an Sexualität verloren. | Ich habe das Interesse an Sexualität völlig verloren."
+]
+
+bdi_ii_item_names = [
+    "Traurigkeit",
+    "Pessimismus",
+    "Versagensgefühle",
+    "Unzufriedenheit",
+    "Schuldgefühle",
+    "Gefühle von Bestrafung",
+    "Selbstablehnung",
+    "Selbstkritik",
+    "Suizidgedanken oder -wünsche",
+    "Weinen",
+    "Unruhe",
+    "Verlust von Interesse",
+    "Entscheidungsschwierigkeiten",
+    "Wertlosigkeitsgefühle",
+    "Verlust von Energie",
+    "Schlafstörungen",
+    "Reizbarkeit",
+    "Veränderungen des Appetits",
+    "Konzentrationsschwierigkeiten",
+    "Müdigkeit oder Erschöpfung",
+    "Verlust des Interesses an Sexualität"
+]
+
+bdi_ii_data = [
+    {
+        "field_name": f"bdi_ii_{i+1}_{bdi_ii_item_names[i].lower().replace(' ', '_')}",
+        "form_name": "bdi_ii",
+        "section_header": "",
+        "field_type": "radio",
+        "field_label": f"{i+1}.",
+        "choices": " | ".join([f"{j}, {option}" for j, option in enumerate(item.split(" | "))]),
+        "field_note": "",
+        "text_validation_type_or_show_slider_number": "",
+        "text_validation_min": "",
+        "text_validation_max": "",
+        "identifier": "",
+        "branching_logic": "",
+        "required_field": "",
+        "custom_alignment": "",
+        "question_number": str(i+1),
+        "matrix_group_name": "",
+        "matrix_ranking": "",
+        "field_annotation": ""
+    }
+    for i, item in enumerate(bdi_ii_items)
+]
+bdi_ii = pd.DataFrame(bdi_ii_data)
+
