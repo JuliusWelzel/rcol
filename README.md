@@ -1,32 +1,86 @@
 # rcol
 
-A Python package for creating, stacking, and uploading pandas DataFrame templates for REDCap instruments. Includes tests for REDCap compatibility. Uses uv for packaging and publishing to PyPI.
+Pandas DataFrame templates for REDCap instruments with stacking and upload functionality.
 
-## Features
-- DataFrame templates for REDCap instruments
-- Stack and upload to REDCap projects
-- REDCap compatibility testing
-- PyPI-ready with uv
+## Installation
 
-## Usage
-Install with uv:
-```sh
-uv pip install .
+```bash
+pip install rcol
 ```
 
-Example usage:
+## Quick Start
+
 ```python
-from src.redcap_templates import get_instrument_template, stack_instruments, upload_to_redcap
+from rcol.instruments import fal, ehi, bdi_ii
+import pandas as pd
 
-df = get_instrument_template('demographics')
-# ... fill in data ...
-stacked = stack_instruments([df])
-# upload_to_redcap(stacked, api_url, api_token)
+# Use individual instruments
+print(f"FAL has {len(fal)} fields")
+print(f"EHI has {len(ehi)} fields") 
+print(f"BDI-II has {len(bdi_ii)} fields")
+
+# Stack multiple instruments for REDCap upload
+all_instruments = pd.concat([fal, ehi, bdi_ii], ignore_index=True)
+print(f"Combined: {len(all_instruments)} total fields")
+
+# Upload to REDCap (requires PyCap and API credentials)
+from redcap import Project
+project = Project(api_url, api_token)
+project.import_metadata(all_instruments, import_format='df')
 ```
+
+## Available Instruments
+
+- `fal`: Fragebogen zur Allgemeinen Leistungsfähigkeit (General Performance Questionnaire)
+- `ehi`: Edinburgh Handedness Inventory 
+- `bdi_ii`: Beck Depression Inventory II
+
+## Contributing a New Instrument
+
+1. **Fork this repository**
+
+2. **Add your instrument data** in `src/rcol/instruments.py`:
+   ```python
+   # Define your instrument fields
+   my_instrument_data = [
+       {
+           "field_name": "record_id",
+           "form_name": "my_instrument", 
+           "field_type": "text",
+           "field_label": "Record ID",
+           # ... other REDCap metadata fields
+       },
+       # ... more fields
+   ]
+   
+   # Create DataFrame
+   my_instrument = pd.DataFrame(my_instrument_data)
+   ```
+
+3. **Add a test** in `tests/test_templates.py`:
+   ```python
+   def test_my_instrument():
+       assert "record_id" in my_instrument.columns
+       assert "my_field" in my_instrument.columns
+   ```
+
+4. **Submit a pull request** with your instrument and test
 
 ## Development
-- Run tests with `pytest`
-- Publish with `uv publish`
+
+```bash
+# Clone and install for development
+git clone https://github.com/JuliusWelzel/rcol.git
+cd rcol
+uv sync
+
+# Run tests
+uv run pytest
+
+# Build package
+uv build
+```
 
 ## License
+
 MIT
