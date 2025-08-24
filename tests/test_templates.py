@@ -1,4 +1,4 @@
-from src.rcol.instruments import fal, ehi, bdi_ii
+from rcol.instruments import fal, ehi, bdi_ii
 import pandas as pd
 import pytest
 
