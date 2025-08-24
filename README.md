@@ -1,6 +1,5 @@
 # rcol
-
-Pandas DataFrame templates for REDCap instruments with stacking and upload functionality.
+rcol (RedCap Uni Oldenburg) is a Python package that provides Pandas DataFrame templates for REDCap instruments with stacking and upload functionality.
 
 ## Installation
 
