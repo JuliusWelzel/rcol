@@ -33,6 +33,7 @@ project.import_metadata(all_instruments, import_format='df')
 - `fal`: Fragebogen zur Allgemeinen Leistungsfähigkeit (General Performance Questionnaire)
 - `ehi`: Edinburgh Handedness Inventory 
 - `bdi_ii`: Beck Depression Inventory II
+- `moca`: Montreal Cognitive Assessment (Version A)
 
 ## Contributing a New Instrument
 
