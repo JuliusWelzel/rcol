@@ -2,13 +2,13 @@ from dotenv import load_dotenv
 import pandas as pd
 from redcap import Project
 import os
-from src.rcol.instruments import fal, ehi, bdi_ii
+from src.rcol.instruments import fal, ehi, bdi_ii, moca
 
 load_dotenv()
 RC_API_KEY = os.getenv("RC_API_KEY")
 
 # Stack all instrument DataFrames
-all_instruments = pd.concat([fal, ehi, bdi_ii], ignore_index=True)
+all_instruments = pd.concat([fal, moca], ignore_index=True)
 # print form names
 print("Form names:")
 print(all_instruments['form_name'].unique())
