@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.2] - 2025-08-19
+
+- Added MoCA instrument to the rcol package.
+- Updated tutorial to include MoCA instrument.
+
 ## [0.0.1] - 2025-08-18
 
 - Initial release of the rcol package.
