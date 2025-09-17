@@ -923,3 +923,62 @@ bdi_ii_data = [
 ]
 bdi_ii = pd.DataFrame(bdi_ii_data)
 
+kviq_questions = [
+    "1. Die Bewegung Ihres rechten Arms nach vorne und zurück (wie beim Gehen).",
+    "2. Die Bewegung Ihres rechten Arms nach oben und unten.",
+    "3. Die Bewegung Ihres rechten Arms nach außen und innen.",
+    "4. Die Bewegung Ihres rechten Beins nach vorne und zurück (wie beim Gehen).",
+    "5. Die Bewegung Ihres rechten Beins nach oben und unten.",
+    "6. Die Bewegung Ihres rechten Beins nach außen und innen.",
+    "7. Die Bewegung Ihres Rumpfes nach vorne und zurück.",
+    "8. Die Bewegung Ihres Rumpfes nach rechts und links.",
+    "9. Die Bewegung Ihres Kopfes nach vorne und zurück.",
+    "10. Die Bewegung Ihres Kopfes nach rechts und links."
+]
+
+kviq_data = []
+for i, question in enumerate(kviq_questions, 1):
+    # Visual subscale
+    kviq_data.append({
+        "field_name": f"kviq_v_{i}",
+        "form_name": "kviq",
+        "section_header": "",
+        "field_type": "radio",
+        "field_label": f"Visual imagery: How clearly can you see the movement? (1 = No image, 5 = Image as clear as seeing)",
+        "choices": "1, No image | 2, Vague image | 3, Moderately clear image | 4, Clear image | 5, Image as clear as seeing",
+        "field_note": question,
+        "text_validation_type_or_show_slider_number": "",
+        "text_validation_min": "1",
+        "text_validation_max": "5",
+        "identifier": "",
+        "branching_logic": "",
+        "required_field": "",
+        "custom_alignment": "",
+        "question_number": str(i),
+        "matrix_group_name": "",
+        "matrix_ranking": "",
+        "field_annotation": ""
+    })
+    # Kinesthetic subscale
+    kviq_data.append({
+        "field_name": f"kviq_k_{i}",
+        "form_name": "kviq",
+        "section_header": "",
+        "field_type": "radio",
+        "field_label": f"Kinesthetic imagery: How intensely can you feel the movement? (1 = No sensation, 5 = As intense as executing)",
+        "choices": "1, No sensation | 2, Vague sensation | 3, Moderately intense sensation | 4, Intense sensation | 5, As intense as executing",
+        "field_note": question,
+        "text_validation_type_or_show_slider_number": "",
+        "text_validation_min": "1",
+        "text_validation_max": "5",
+        "identifier": "",
+        "branching_logic": "",
+        "required_field": "",
+        "custom_alignment": "",
+        "question_number": str(i),
+        "matrix_group_name": "",
+        "matrix_ranking": "",
+        "field_annotation": ""
+    })
+
+kviq = pd.DataFrame(kviq_data)
