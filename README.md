@@ -57,14 +57,15 @@ project.import_metadata(all_instruments, import_format='df')
    my_instrument = pd.DataFrame(my_instrument_data)
    ```
 
-3. **Add a test** in `tests/test_templates.py`:
-   ```python
-   def test_my_instrument():
-       assert "record_id" in my_instrument.columns
-       assert "my_field" in my_instrument.columns
-   ```
+3. **Run the instrument test suite** to validate your template. The shared tests automatically pick up every `pandas.DataFrame` exported from `rcol.instruments` and check for required REDCap metadata, non-empty field names, and duplicate protection:
 
-4. **Submit a pull request** with your instrument and test
+    ```bash
+    uv run --with pytest pytest -k instrument
+    ```
+
+    If you add custom validation that needs extra assertions, extend `tests/test_templates.py` accordingly.
+
+4. **Submit a pull request.** Every PR triggers the GitHub Actions CI workflow, which runs the same instrument tests on Ubuntu with Python 3.11. Make sure the workflow badge stays green before requesting review.
 
 ## Development
 

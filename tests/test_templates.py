@@ -1,8 +1,13 @@
-from rcol.instruments import fal, ehi, bdi_ii
+"""Tests validating all REDCap instrument templates."""
+
+from __future__ import annotations
+
 import pandas as pd
 import pytest
 
-required_columns = [
+from rcol import instruments as inst
+
+REQUIRED_COLUMNS = {
     "field_name",
     "form_name",
     "section_header",
@@ -20,13 +25,49 @@ required_columns = [
     "question_number",
     "matrix_group_name",
     "matrix_ranking",
-    "field_annotation"
-] 
+    "field_annotation",
+}
 
 
-instruments = ["fal", "ehi"]
+INSTRUMENTS = {
+    name: value
+    for name, value in vars(inst).items()
+    if isinstance(value, pd.DataFrame) and not name.startswith("_")
+}
 
-@pytest.mark.parametrize("instrument", instruments)
-def test_instrument_has_required_columns(instrument):
-    for col in required_columns:
-        assert col in instrument.columns, f"Missing column '{col}' in instrument '{instrument}'"
+assert INSTRUMENTS, "No instrument DataFrames discovered in rcol.instruments"
+
+
+@pytest.mark.parametrize("name, dataframe", INSTRUMENTS.items())
+def test_instrument_is_dataframe(name: str, dataframe: pd.DataFrame) -> None:
+    """Ensure each instrument exposes a pandas DataFrame."""
+
+    assert isinstance(
+        dataframe, pd.DataFrame
+    ), f"Instrument '{name}' must be a pandas DataFrame"
+    assert not dataframe.empty, f"Instrument '{name}' must contain at least one field"
+
+
+@pytest.mark.parametrize("name, dataframe", INSTRUMENTS.items())
+def test_instrument_has_required_columns(name: str, dataframe: pd.DataFrame) -> None:
+    """Validate the REDCap metadata columns are present."""
+
+    missing = REQUIRED_COLUMNS.difference(dataframe.columns)
+    assert not missing, (
+        f"Instrument '{name}' is missing required columns: "
+        f"{', '.join(sorted(missing))}"
+    )
+
+
+@pytest.mark.parametrize("name, dataframe", INSTRUMENTS.items())
+def test_instrument_field_name_integrity(name: str, dataframe: pd.DataFrame) -> None:
+    """Check that field names are unique and non-empty."""
+
+    assert dataframe["field_name"].notna().all(), (
+        f"Instrument '{name}' contains empty field_name entries"
+    )
+    duplicates = dataframe[dataframe["field_name"].duplicated()]["field_name"].tolist()
+    assert not duplicates, (
+        f"Instrument '{name}' has duplicate field_name entries: "
+        f"{', '.join(duplicates)}"
+    )
