@@ -65,7 +65,13 @@ project.import_metadata(all_instruments, import_format='df')
 
     If you add custom validation that needs extra assertions, extend `tests/test_templates.py` accordingly.
 
-4. **Submit a pull request.** Every PR triggers the GitHub Actions CI workflow, which runs the same instrument tests on Ubuntu with Python 3.11. Make sure the workflow badge stays green before requesting review.
+4. **Preview the documentation (optional).** The MkDocs site renders the instrument tables directly from `rcol.instruments`. To check the output locally:
+
+    ```bash
+    uv run --group docs mkdocs serve
+    ```
+
+5. **Submit a pull request.** Every PR triggers the GitHub Actions CI workflow, which runs the same instrument tests on Ubuntu with Python 3.11. Make sure the workflow badge stays green before requesting review.
 
 ## Development
 
@@ -80,6 +86,19 @@ uv run pytest
 
 # Build package
 uv build
+```
+
+## Documentation
+
+The documentation site is powered by MkDocs and `mkdocstrings`, so instrumentation
+tables are rendered directly from `rcol.instruments` at build time.
+
+```bash
+# Serve docs locally
+uv run --group docs mkdocs serve
+
+# Build static site
+uv run --group docs mkdocs build
 ```
 
 ## License

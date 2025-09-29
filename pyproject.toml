@@ -13,3 +13,14 @@ dependencies = [
     "PyCap>=2.0.0",
     "ipykernel>=6.29.5",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "mkdocs>=1.6",
+    "mkdocstrings[python]>=0.25",
+]
+docs = [
+    "mkdocs>=1.6",
+    "mkdocstrings[python]>=0.25",
+]

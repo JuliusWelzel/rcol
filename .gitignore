@@ -36,3 +36,4 @@ share/python-wheels/
 
 .env
 uv.lock
+site/

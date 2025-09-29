@@ -1,0 +1,18 @@
+site_name: rcol
+site_description: "REDCap instrument templates for the University of Oldenburg"
+site_url: ""
+
+theme:
+  name: mkdocs
+
+nav:
+  - Home: index.md
+  - Instrument Reference: instruments.md
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
