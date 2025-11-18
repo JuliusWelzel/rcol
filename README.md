@@ -33,7 +33,45 @@ project.import_metadata(all_instruments, import_format='df')
 - `fal`: Fragebogen zur Allgemeinen Leistungsfähigkeit (General Performance Questionnaire)
 - `ehi`: Edinburgh Handedness Inventory 
 - `bdi_ii`: Beck Depression Inventory II
-- `moca`: Montreal Cognitive Assessment (Version A)
+- `moca`: Montreal Cognitive Assessment
+
+## Creating Custom Instruments
+
+You can create custom instruments or extend existing ones without contributing to the package:
+
+```python
+import pandas as pd
+from rcol.instruments import fal, ehi
+from redcap import Project
+
+# Create a custom instrument from scratch
+custom_instrument = pd.DataFrame({
+    'field_name': ['record_id', 'custom_field_1', 'custom_field_2'],
+    'field_label': ['Record ID', 'Custom Field 1', 'Custom Field 2'],
+    'field_type': ['text', 'text', 'radio'],
+    'form_name': ['custom_form', 'custom_form', 'custom_form'],
+    'choices': ['', '', '1, Yes | 0, No']
+})
+
+# Add a new question to an existing instrument
+fal_new_question = pd.DataFrame({
+    'field_name': ['fal_like_redcap'],
+    'field_label': ['Do you like REDCap?'],
+    'field_type': ['radio'],
+    'form_name': ['fal'],
+    'choices': ['1, Yes | 0, No']
+})
+
+fal_extended = pd.concat([fal, fal_new_question], ignore_index=True)
+
+# Combine everything and upload to REDCap
+all_instruments = pd.concat([fal_extended, ehi, custom_instrument], ignore_index=True)
+
+project = Project(api_url, api_token)
+project.import_metadata(all_instruments, import_format='df')
+```
+
+**See `tutorial_custom_instruments.py` for a complete guide with all REDCap metadata fields.**
 
 ## Contributing a New Instrument
 
