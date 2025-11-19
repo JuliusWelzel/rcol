@@ -3,7 +3,7 @@ site_description: "REDCap instrument templates for the University of Oldenburg"
 site_url: ""
 
 theme:
-  name: mkdocs
+  name: material
 
 nav:
   - Home: index.md
