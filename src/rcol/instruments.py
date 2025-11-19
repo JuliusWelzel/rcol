@@ -1293,6 +1293,7 @@ tmt_data = [
 tmt = pd.DataFrame(tmt_data)
 
 # Weinstein's Noise Sensitivity Scale (WNSS-21)
+# Worthington, Debra L. ‘Weinstein Noise Sensitivity Scale (WNSS): (Weinstein, 1978)’. In The Sourcebook of Listening Research, 1st edn, edited by Debra L. Worthington and Graham D. Bodie. Wiley, 2017. https://doi.org/10.1002/9781119102991.ch52.
 wnss_data = [
     {
         "field_name": "wnss_instructions",
