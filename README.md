@@ -34,6 +34,9 @@ project.import_metadata(all_instruments, import_format='df')
 - `ehi`: Edinburgh Handedness Inventory 
 - `bdi_ii`: Beck Depression Inventory II
 - `moca`: Montreal Cognitive Assessment
+- `tmt`: Trail Making Test
+- `wnss`: Weinstein's Noise Sensitivity Scale (WNSS-21)
+
 
 ## Creating Custom Instruments
 
