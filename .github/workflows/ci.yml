@@ -38,3 +38,11 @@ jobs:
 
       - name: Run pytest
         run: uv run --with pytest pytest
+
+      - name: Test pip install from PyPI
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install rcol
+
+      - name: Verify pip installation
+        run: python -c "from rcol.instruments import fal, ehi, bdi_ii, moca, tmt, wnss; print(f'✓ All instruments imported successfully from PyPI')"
