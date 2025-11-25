@@ -1,5 +1,12 @@
 # rcol
+
+[![CI](https://github.com/JuliusWelzel/rcol/actions/workflows/ci.yml/badge.svg)](https://github.com/JuliusWelzel/rcol/actions/workflows/ci.yml)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
+[![PyPI version](https://badge.fury.io/py/rcol.svg)](https://badge.fury.io/py/rcol)
+
 rcol (RedCap Uni Oldenburg) is a Python package that provides Pandas DataFrame templates for REDCap instruments with stacking and upload functionality.
+
+**Tested on:** Windows, Linux, macOS | **Python:** 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
 
 ## Installation
 
@@ -112,7 +119,7 @@ project.import_metadata(all_instruments, import_format='df')
     uv run --group docs mkdocs serve
     ```
 
-5. **Submit a pull request.** Every PR triggers the GitHub Actions CI workflow, which runs the same instrument tests on Ubuntu with Python 3.11. Make sure the workflow badge stays green before requesting review.
+5. **Submit a pull request.** Every PR triggers the GitHub Actions CI workflow, which runs the instrument tests across Windows, Linux, and macOS with Python 3.8-3.13. Make sure the workflow badge stays green before requesting review.
 
 ## Development
 
