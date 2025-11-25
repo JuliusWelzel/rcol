@@ -6,6 +6,7 @@ import pandas as pd
 import pytest
 
 from rcol import instruments as inst
+from rcol import rtg
 
 REQUIRED_COLUMNS = {
     "field_name",
@@ -35,7 +36,16 @@ INSTRUMENTS = {
     if isinstance(value, pd.DataFrame) and not name.startswith("_")
 }
 
-assert INSTRUMENTS, "No instrument DataFrames discovered in rcol.instruments"
+# Add RTG instruments
+RTG_INSTRUMENTS = {
+    name: value
+    for name, value in vars(rtg).items()
+    if isinstance(value, pd.DataFrame) and not name.startswith("_")
+}
+
+INSTRUMENTS.update(RTG_INSTRUMENTS)
+
+assert INSTRUMENTS, "No instrument DataFrames discovered in rcol.instruments or rcol.rtg"
 
 
 @pytest.mark.parametrize("name, dataframe", INSTRUMENTS.items())
