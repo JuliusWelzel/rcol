@@ -1,6 +1,6 @@
 [project]
 name = "rcol"
-version = "0.0.4"
+version = "0.0.5"
 description = "Pandas DataFrame templates for REDCap instruments, with stacking and upload functionality."
 authors = [
     { name = "Julius Welzel", email = "julius.welzel@gmail.com" }
