@@ -18,7 +18,7 @@ Usage:
 
 from dotenv import load_dotenv
 import pandas as pd
-from redcap import Project
+from redcap import Project, RedcapError
 import os
 
 # Import instruments from the installed rcol package
@@ -63,8 +63,12 @@ for instrument_name in rtg_instruments:
     print(f"  - {instrument_name}: {instrument_df.shape[0]} rows")
 
 # Combine all RTG instruments into one big DataFrame
-all_rtg_instruments = pd.concat(rtg_dfs, ignore_index=True)
-print(f"Total RTG instruments DataFrame: {all_rtg_instruments.shape[0]} rows")
+if rtg_dfs:
+    all_rtg_instruments = pd.concat(rtg_dfs, ignore_index=True)
+    print(f"Total RTG instruments DataFrame: {all_rtg_instruments.shape[0]} rows")
+else:
+    print("No RTG instruments found")
+    all_rtg_instruments = None
 print()
 
 
@@ -72,14 +76,17 @@ print()
 # 4. Uploading to REDCap
 # ============================================================================
 # Initialize the REDCap project
-api_url = 'https://redcapdev.uol.de/api/'
-rc_project = Project(api_url, RC_API_KEY)
+if all_rtg_instruments is not None:
+    api_url = 'https://redcapdev.uol.de/api/'
+    rc_project = Project(api_url, RC_API_KEY)
 
-# Upload instruments to REDCap using the import_metadata method
-# Note: This will replace/update the project metadata
-try:
-    response = rc_project.import_metadata(all_rtg_instruments, import_format='df')
-    print(f"✓ Successfully uploaded {response} fields to REDCap")
-except Exception as e:
-    print(f"✗ Error uploading to REDCap: {e}")
-    print("  Make sure RC_API_KEY is set in your .env file and the API URL is correct")
+    # Upload instruments to REDCap using the import_metadata method
+    # Note: This will replace/update the project metadata
+    try:
+        response = rc_project.import_metadata(all_rtg_instruments, import_format='df')
+        print(f"✓ Successfully uploaded {response} fields to REDCap")
+    except RedcapError as e:
+        print(f"✗ Error uploading to REDCap: {e}")
+        print("  Make sure RC_API_KEY is set in your .env file and the API URL is correct")
+else:
+    print("Skipping REDCap upload (no instruments to upload)")

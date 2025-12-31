@@ -18,7 +18,7 @@ Usage:
 import os
 import pandas as pd
 from rcol.instruments import fal, ehi, moca
-from redcap import Project
+from redcap import Project, RedcapError
 
 # Get REDCap API credentials from environment
 RC_API_KEY = os.getenv("RC_API_KEY")
@@ -115,6 +115,6 @@ rc_project = Project(api_url, RC_API_KEY)
 try:
     response = rc_project.import_metadata(all_instruments, import_format='df')
     print(f"✓ Successfully uploaded {response} fields to REDCap")
-except Exception as e:
+except RedcapError as e:
     print(f"✗ Error uploading to REDCap: {e}")
 
