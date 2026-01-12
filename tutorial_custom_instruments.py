@@ -5,15 +5,23 @@ This tutorial demonstrates how to:
 2. Modify existing instruments by adding fields
 3. Combine built-in and custom instruments
 4. Upload everything to REDCap
+
+Prerequisites:
+- Install rcol: pip install rcol
+- Install PyCap: pip install PyCap
+- Set environment variable RC_API_KEY with your REDCap API key
+
+Usage:
+    python tutorial_custom_instruments.py
 """
 
 import os
 import pandas as pd
 from rcol.instruments import fal, ehi, moca
-from redcap import Project
+from redcap import Project, RedcapError
 
 # Get REDCap API credentials from environment
-api_key = os.getenv("REDCAP_API_KEY")
+RC_API_KEY = os.getenv("RC_API_KEY")
 api_url = "https://redcapdev.uol.de/api/"  # Replace with your actual REDCap API URL
 
 # ============================================================================
@@ -101,13 +109,12 @@ print()
 # 5. Uploading to REDCap
 # ============================================================================
 # Initialize REDCap project connection
-RC_API_KEY = os.getenv("RC_API_KEY")
 rc_project = Project(api_url, RC_API_KEY)
 
 # Upload instruments to REDCap using the import_metadata method
 try:
     response = rc_project.import_metadata(all_instruments, import_format='df')
     print(f"✓ Successfully uploaded {response} fields to REDCap")
-except Exception as e:
+except RedcapError as e:
     print(f"✗ Error uploading to REDCap: {e}")
 

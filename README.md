@@ -83,6 +83,30 @@ project.import_metadata(all_instruments, import_format='df')
 
 **See `tutorial_custom_instruments.py` for a complete guide with all REDCap metadata fields.**
 
+## Running Tutorial Scripts
+
+Two tutorial scripts are provided in the repository to help you get started:
+
+1. **`tutorial_custom_instruments.py`** - Create custom instruments and extend existing ones
+2. **`tutorial_existing_instruments.py`** - Use existing instruments from rcol and the RTG (Research Template Gallery)
+
+To run these tutorials after installing rcol:
+
+```bash
+# Install rcol and dependencies
+pip install rcol python-dotenv PyCap
+
+# Set up your REDCap API credentials
+# Create a .env file with: RC_API_KEY=your_api_key_here
+
+# Download the tutorial scripts from the repository
+# Then run them:
+python tutorial_custom_instruments.py
+python tutorial_existing_instruments.py
+```
+
+**Note:** The tutorials require valid REDCap API credentials. Make sure to set the `RC_API_KEY` environment variable or create a `.env` file with your credentials before running them.
+
 ## Contributing a New Instrument
 
 1. **Fork this repository**
