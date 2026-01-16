@@ -1,0 +1,77 @@
+/* Custom styles for rcol documentation */
+
+/* Table styling */
+.md-typeset table:not([class]) {
+    font-size: 0.85rem;
+}
+
+.md-typeset table:not([class]) th {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+/* Code block in tables */
+.md-typeset table code {
+    background-color: transparent;
+    padding: 0;
+}
+
+/* DataFrame tables */
+.md-typeset .dataframe {
+    font-size: 0.8rem;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.md-typeset .dataframe th {
+    white-space: nowrap;
+    padding: 0.5rem;
+}
+
+.md-typeset .dataframe td {
+    padding: 0.4rem 0.5rem;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Card grid layout */
+.grid.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.grid.cards > * {
+    padding: 1rem;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 0.5rem;
+}
+
+/* Admonition improvements */
+.md-typeset .admonition {
+    font-size: 0.9rem;
+}
+
+/* Step indicators */
+.md-typeset h3::before {
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+/* Horizontal rule between instruments */
+.md-typeset hr {
+    margin: 2rem 0;
+    border-top: 2px solid var(--md-default-fg-color--lightest);
+}
+
+/* Button styling */
+.md-button {
+    margin-top: 1rem !important;
+}
+
+/* Skip images that don't exist yet */
+img[src$=".skip"] {
+    display: none;
+}

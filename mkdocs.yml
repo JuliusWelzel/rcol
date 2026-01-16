@@ -4,10 +4,43 @@ site_url: ""
 
 theme:
   name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - content.code.copy
+    - content.tabs.link
 
 nav:
   - Home: index.md
-  - Instrument Reference: instruments.md
+  - Getting Started:
+    - getting-started.md
+    - setup/index.md
+    - 1. Register Account: setup/account.md
+    - 2. Create Project: setup/project.md
+    - 3. Get API Access: setup/api-key.md
+    - 4. Setup Python: setup/python-setup.md
+    - 5. Upload Instruments: setup/upload-instruments.md
+    - 6. Enable Surveys: setup/survey-mode.md
+    - Troubleshooting: setup/troubleshooting.md
+  - Instruments:
+    - instruments/index.md
+    - General Instruments: instruments/general.md
+    - RTG Instruments: instruments/rtg.md
 
 plugins:
   - search
@@ -16,3 +49,27 @@ plugins:
         python:
           options:
             docstring_style: google
+  - markdown-exec
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/extra.css

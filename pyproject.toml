@@ -21,11 +21,15 @@ dev = [
     "mkdocs>=1.6",
     "mkdocs-material>=9.5",
     "mkdocstrings[python]>=0.25",
+    "markdown-exec[ansi]>=1.9",
+    "tabulate>=0.9",
 ]
 docs = [
     "mkdocs>=1.6",
     "mkdocs-material>=9.5",
     "mkdocstrings[python]>=0.25",
+    "markdown-exec[ansi]>=1.9",
+    "tabulate>=0.9",
 ]
 
 [build-system]
